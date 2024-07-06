@@ -19,13 +19,14 @@ void main()
     printf("Enter the port number:");
     scanf("%d",&port); //get port number form the user
 
+    printf("Listening for connections...\n");
+    
     server.sin_port = htons(port); //convert port to network byte order
     server.sin_addr.s_addr = INADDR_ANY; // set serversocket address to any local IP address
 
     bind(ss, (struct sockaddr*)&server, sizeof(server)); //bind the serversocket to the server address
 
     listen(ss,1); //listen for incoming connections on the serversocket
-    printf("Listening for connections...");
 
     len = sizeof(client); //set length of clientsocket
     cs = accept(ss, (struct sockaddr*)&client, &len); //accept incoming connections on the server socket
