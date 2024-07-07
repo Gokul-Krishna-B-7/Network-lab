@@ -5,7 +5,7 @@
 #include <arpa/inet.h>  // for htons()
 #include <unistd.h>     // for close()
 
-void main(){
+int main(){
 
     int cs, port; // initialize clientsocket, port
     struct sockaddr_in server; // initialize client socket address
@@ -27,7 +27,7 @@ void main(){
         scanf("%s", buffer);
         printf("Client: %s\n", buffer);
 
-        sendto(cs, buffer, sizeof(buffer), 0, (struct sockaddr *)&server, sizeof(server)); // send message to server
+        sendto(cs, buffer, sizeof(buffer), 0, (struct sockaddr *)&server, len); // send message to server
         
         recvfrom(cs, &flag, sizeof(flag), 0, (struct sockaddr *)&server, &len); // receive message from server
 
@@ -42,4 +42,5 @@ void main(){
     } while (res == 1); // Loop until user inputs '0' (no)
 
     close(cs);
+    return 0;
 }
