@@ -35,5 +35,12 @@ int main() {
         scanf("%d", &incoming);
     }
 
+    // Process remaining packets in the bucket
+    while (bucket > 0) {
+        outgoing = (bucket < output_rate) ? bucket : output_rate;
+        bucket -= outgoing;
+        printf("Sent %d packets. Bucket size: %d\n", outgoing, bucket);
+    }
+
     return 0;
 }
